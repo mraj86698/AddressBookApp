@@ -27,9 +27,9 @@ public class UserController {
 
 	@PostMapping("/register")
 	public ResponseEntity<ResponseDto> registerAccount( @Valid @RequestBody UserRegisterDto userRegistrationDTO){
-        User userData = null;
-        userData = userService.createUserRegister(userRegistrationDTO);
-        ResponseDto responseDTO = new ResponseDto("User has been registered",userData);
+
+        String token = userService.createUserRegister(userRegistrationDTO);
+        ResponseDto responseDTO = new ResponseDto("User has been registered",token);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 	 @GetMapping("/login")

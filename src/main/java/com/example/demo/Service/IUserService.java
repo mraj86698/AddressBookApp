@@ -8,7 +8,7 @@ import com.example.demo.Model.User;
 
 public interface IUserService {
 
-	User createUserRegister(UserRegisterDto userRegistrationDTO);
+	String createUserRegister(UserRegisterDto userRegistrationDTO);
 
 
 	 Optional<User> userLoginAccount(UserLoginDto userLoginDTO);

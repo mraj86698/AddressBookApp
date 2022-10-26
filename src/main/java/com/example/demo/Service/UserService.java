@@ -9,17 +9,21 @@ import com.example.demo.Dto.UserLoginDto;
 import com.example.demo.Dto.UserRegisterDto;
 import com.example.demo.Model.User;
 import com.example.demo.Repository.UserRepository;
+import com.example.demo.Utility.AddressBookUtility;
 
 @Service
 public class UserService implements IUserService {
 	@Autowired
 	UserRepository userRepo;
+	@Autowired
+    AddressBookUtility addressBookUtility;
 
 	@Override
-	public User createUserRegister(UserRegisterDto userRegisterDto) {
-		User user = null;
-		user = new User(userRegisterDto);
-		return userRepo.save(user);
+	public String createUserRegister(UserRegisterDto userRegisterDto) {
+		User user = new User(userRegisterDto);
+		userRepo.save(user);
+		String token = addressBookUtility.createToken(user.getUserId());
+        return token;
 	}
 
 	 @Override
