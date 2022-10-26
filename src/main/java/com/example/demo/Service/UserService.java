@@ -1,5 +1,7 @@
 package com.example.demo.Service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +22,14 @@ public class UserService implements IUserService {
 		return userRepo.save(user);
 	}
 
-	@Override
-	public User userLoginAccount(UserLoginDto userLoginDto) {
-		return userRepo.checkUserLogin(userLoginDto);
-	}
+	 @Override
+	    public Optional<User> userLoginAccount(UserLoginDto userLoginDTO) {
+	        Optional<User> userData = userRepo.checkUserLogin(userLoginDTO.getUserName(), userLoginDTO.getPassword());
+	        if(userData.isPresent()){
+	            return userData;
+	        }
+	        else
+	            return null;
+	    }
 
 }

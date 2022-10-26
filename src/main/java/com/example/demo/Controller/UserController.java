@@ -1,5 +1,7 @@
 package com.example.demo.Controller;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +34,7 @@ public class UserController {
     }
 	 @GetMapping("/login")
 	    public ResponseEntity<ResponseDto> UserLoginAccount(@RequestBody UserLoginDto userLoginDto){
-	        User userData = null;
+		 Optional<User> userData = null;
 	        userData = userService.userLoginAccount(userLoginDto);
 	        ResponseDto responseDTO = new ResponseDto("Account Successfully Logged In",userData);
 	        return new ResponseEntity<>(responseDTO,HttpStatus.OK);

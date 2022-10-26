@@ -5,7 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.example.demo.Dto.UserLoginDto;
 import com.example.demo.Dto.UserRegisterDto;
 
 import lombok.AllArgsConstructor;
@@ -27,10 +26,10 @@ public class User {
 		this.emailId = userRegisterDto.getEmailId();
 		this.password = userRegisterDto.getPassword();
 	}
-	public User(UserLoginDto userLoginDto) {
-		this.userName = userLoginDto.getUserName();
-		this.password = userLoginDto.getPassword();
-	}
+//	public User(UserLoginDto userLoginDto) {
+//		this.userName = userLoginDto.getUserName();
+//		this.password = userLoginDto.getPassword();
+//	}
 
 
 
