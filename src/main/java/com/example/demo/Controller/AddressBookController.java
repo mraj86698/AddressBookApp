@@ -50,23 +50,23 @@ public class AddressBookController {
 	public ResponseEntity<ResponseDto>getContactById(@PathVariable("contactId") int contactId){
 		ContactData contactData=null;
 		contactData = addressBookService.getContactById(contactId);
-		ResponseDto	 responseDTO = new ResponseDto("Get Call Success", contactData);
-		return new ResponseEntity<ResponseDto>(responseDTO, HttpStatus.OK);
+		ResponseDto	 ResponseDto = new ResponseDto("Get Call Success", contactData);
+		return new ResponseEntity<ResponseDto>(ResponseDto, HttpStatus.OK);
 	}
 
 	@PostMapping("/create")
 	public ResponseEntity<ResponseDto> saveDataIntoDataBase( @Valid @RequestBody ContactDto contactDTO) {
 		ContactData contactData = null;
 		contactData = addressBookService.createContactData(contactDTO);
-		ResponseDto	 responseDTO = new ResponseDto("Contact Data Created SuccessFully", contactData);
-		return new ResponseEntity<ResponseDto>(responseDTO, HttpStatus.OK);
+		ResponseDto	 ResponseDto = new ResponseDto("Contact Data Created SuccessFully", contactData);
+		return new ResponseEntity<ResponseDto>(ResponseDto, HttpStatus.OK);
 	}
 	@PutMapping("/update/{contactId}")
 	public ResponseEntity<ResponseDto> updateContactData(@PathVariable int contactId,@Valid @RequestBody ContactDto contactDto){
 		ContactData contactData=null;
 		contactData=addressBookService.UpdateContactData(contactId,contactDto);
-		ResponseDto responseDto=new ResponseDto("Contact Data Updated SuccesssFully",contactData);
-		return new ResponseEntity<ResponseDto>(responseDto,HttpStatus.OK);
+		ResponseDto ResponseDto=new ResponseDto("Contact Data Updated SuccesssFully",contactData);
+		return new ResponseEntity<ResponseDto>(ResponseDto,HttpStatus.OK);
 	}
 	@DeleteMapping("/delete/{contactId}")
 	public ResponseEntity<ResponseDto> deleteContactById(@PathVariable int contactId){
@@ -74,6 +74,21 @@ public class AddressBookController {
 		ResponseDto respDTO = new ResponseDto("Contact Data Deleted Successfully ", contactId);
         return new ResponseEntity<ResponseDto> (respDTO, HttpStatus.OK);
 	}
+	 @GetMapping("/sortByCity")
+	    public ResponseEntity<ResponseDto> sortByCity(){
+	        List<ContactData>  contactList = null;
+	        contactList = addressBookService.sortContactsBycity();
+	        ResponseDto ResponseDto = new ResponseDto("Sorted By City Contacts Details",contactList);
+	        return new ResponseEntity<ResponseDto>(ResponseDto,HttpStatus.OK);
+	    }
+
+	    @GetMapping("/sortByState")
+	    public ResponseEntity<ResponseDto> sortByState(){
+	        List<ContactData>  contactList = null;
+	        contactList = addressBookService.sortContactsByState();
+	        ResponseDto ResponseDto = new ResponseDto("Sorted By State Contacts Details",contactList);
+	        return new ResponseEntity<ResponseDto>(ResponseDto,HttpStatus.OK);
+	    }
 
 
 

@@ -45,4 +45,16 @@ public class AddressBookService implements IAddressBookService{
 
 		return addressBookRepo.findAll();
 	}
+	@Override
+    public List<ContactData> sortContactsBycity() {
+        return addressBookRepo.sortByCity();
+    }
+
+    @Override
+    public List<ContactData> sortContactsByState() {
+        return addressBookRepo.sortByState();
+    }
+
+
+
 }

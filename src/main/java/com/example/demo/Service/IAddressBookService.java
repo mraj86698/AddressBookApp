@@ -18,4 +18,8 @@ public interface IAddressBookService {
 
 	List<ContactData> getContactData();
 
+	List<ContactData> sortContactsBycity();
+
+	List<ContactData> sortContactsByState();
+
 }
