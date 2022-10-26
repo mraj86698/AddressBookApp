@@ -56,9 +56,8 @@ public class AddressBookController {
 
 	@PostMapping("/create")
 	public ResponseEntity<ResponseDto> saveDataIntoDataBase( @Valid @RequestBody ContactDto contactDTO) {
-		ContactData contactData = null;
-		contactData = addressBookService.createContactData(contactDTO);
-		ResponseDto	 ResponseDto = new ResponseDto("Contact Data Created SuccessFully", contactData);
+		String token = addressBookService.createContactData(contactDTO);
+		ResponseDto	 ResponseDto = new ResponseDto("Contact Data Created SuccessFully", token);
 		return new ResponseEntity<ResponseDto>(ResponseDto, HttpStatus.OK);
 	}
 	@PutMapping("/update/{contactId}")

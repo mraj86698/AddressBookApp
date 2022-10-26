@@ -8,7 +8,7 @@ import com.example.demo.Model.ContactData;
 public interface IAddressBookService {
 	String getWelcomeMessage();
 
-    ContactData createContactData(ContactDto contactDTO);
+    String createContactData(ContactDto contactDTO);
 
 	ContactData getContactById(int contactId);
 

@@ -9,20 +9,24 @@ import com.example.demo.Dto.ContactDto;
 import com.example.demo.Exception.AddressBookException;
 import com.example.demo.Model.ContactData;
 import com.example.demo.Repository.AddressBookRepository;
+import com.example.demo.Utility.AddressBookUtility;
 @Service
 public class AddressBookService implements IAddressBookService{
 	@Autowired
     AddressBookRepository addressBookRepo;
+	@Autowired
+    AddressBookUtility addressBookUtility;
 
 	@Override
 	    public String getWelcomeMessage() {
 	        return "Welcome to Address Book Application";
 	    }
 	@Override
-    public ContactData createContactData(ContactDto contactDTO) {
-        ContactData contactData = null;
-        contactData = new ContactData(contactDTO);
-        return addressBookRepo.save(contactData);
+    public String createContactData(ContactDto contactDTO) {
+        ContactData contactData  = new ContactData(contactDTO);
+        addressBookRepo.save(contactData);
+        String token = addressBookUtility.createToken(contactData.getContactId());
+        return token;
     }
 
 	@Override
