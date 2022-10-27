@@ -8,7 +8,7 @@ import com.example.demo.Model.ContactData;
 public interface IAddressBookService {
 	String getWelcomeMessage();
 
-    ContactData createContactData(ContactDto contactDTO);
+    String createContactData(ContactDto contactDTO);
 
 	ContactData getContactById(int contactId);
 
@@ -17,5 +17,9 @@ public interface IAddressBookService {
 	void deleteContactById(int contactId);
 
 	List<ContactData> getContactData();
+
+	List<ContactData> sortContactsBycity();
+
+	List<ContactData> sortContactsByState();
 
 }

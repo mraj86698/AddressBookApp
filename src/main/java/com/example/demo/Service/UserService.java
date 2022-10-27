@@ -1,32 +1,43 @@
 package com.example.demo.Service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.Dto.UserLoginDto;
 import com.example.demo.Dto.UserRegisterDto;
 import com.example.demo.Model.User;
 import com.example.demo.Repository.UserRepository;
+import com.example.demo.Utility.AddressBookUtility;
+import com.example.demo.Utility.MailSender;
 
 @Service
-public class UserService implements IUserService{
+public class UserService implements IUserService {
 	@Autowired
 	UserRepository userRepo;
+	@Autowired
+    AddressBookUtility addressBookUtility;
+	@Autowired
+    MailSender mailSender;
 
 	@Override
-	public User createUserRegister(UserRegisterDto userRegisterDto) {
-		User user=null;
-		user=new User(userRegisterDto);
-		return userRepo.save(user);
+	public String createUserRegister(UserRegisterDto userRegisterDto) {
+		User user = new User(userRegisterDto);
+		userRepo.save(user);
+		String token = addressBookUtility.createToken(user.getUserId());
+		mailSender.sendEmail(userRegisterDto.getEmailId(),"Registration Succesful","Account Created with "+user);
+        return token;
 	}
 
-//	public User UserLoginAccount(UserLoginDto userLoginDto) {
-//		return userRepo.checkUserLogin(userLoginDto);
-//    }
-
-	@Override
-	    public User userLoginAccount(String userName, String password) {
-	        return userRepo.checkUserLogin(userName,password);
+	 @Override
+	    public Optional<User> userLoginAccount(UserLoginDto userLoginDTO) {
+	        Optional<User> userData = userRepo.checkUserLogin(userLoginDTO.getUserName(), userLoginDTO.getPassword());
+	        if(userData.isPresent()){
+	            return userData;
+	        }
+	        else
+	            return null;
 	    }
-
 
 }
